@@ -56,5 +56,13 @@ void update(lli pos,lli suru,lli ses,lli f,lli l,lli val)
 }
 int main()
 {
-    
+    lli n,ar[mx],i,j,val;
+    cin>>n;
+    for(i=0;i<n;i++)
+    cin>>ar[i+1];
+    init(1,1,n);
+    cin>>i>>j>>val;
+    update(1,1,n,i,j,val);
+    cin>>i>>j;
+    query(1,1,n,i,j);
 }
