@@ -6,49 +6,35 @@ vector<lli> vc[200000];
  
 void dfs_downpath(lli n, lli par)
 {
-  
   for (auto it : vc[n])
   {
     if (it != par)
     {
-     
-      dfs_downpath(it, n);
+     dfs_downpath(it, n);
      downPath[n]=max(downPath[n],1+downPath[it]);
-     
     }
   }
- 
 }
- 
- 
 void distance_dfs(lli n,lli par,lli par_dis)
 {
-  
   vector<pair<lli,lli>>children;
   lli ans=0;
- // cout<<"n= "<<n<<endl;
   for(auto it:vc[n])
   {
     if(it!=par)
     {
-      
       children.push_back({downPath[it],it});
-     
     }
   }
- 
  sort(children.rbegin(),children.rend());
- //cout<<n<<endl;
  for(lli i=0;i<children.size();i++)
  {
- // cout<<children[i].first<<" "<<children[i].second<<" "<<n<<" "<<par_dis<<endl;
    if(i==0)
    {
     if(children.size()>1)
     distance_dfs(children[i].second,n,max(children[1].first+2,par_dis+1));
     else
     distance_dfs(children[i].second,n,par_dis+1);
-
    }
    else
    distance_dfs(children[i].second,n,max(children[0].first+2,par_dis+1));

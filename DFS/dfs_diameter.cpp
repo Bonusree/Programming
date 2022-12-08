@@ -6,35 +6,25 @@ vector<lli> vc[200000];
 
 void dfs_downpath(lli n, lli par)
 {
-  
   for (auto it : vc[n])
-  {
-    if (it != par)
-    {
-     
-      dfs_downpath(it, n);
+  { if (it != par)
+    {dfs_downpath(it, n);
      downPath[n]=max(downPath[n],1+downPath[it]);
-     
     }
   }
- 
 }
-
-
 void diametre_dfs(lli n,lli par)
 {
   vector<lli>children;
   lli ans=0;
   for(auto it:vc[n])
-  {
-    if(it!=par)
+  {if(it!=par)
     {
       diametre_dfs(it,n);
       children.push_back(downPath[it]);
       ans=max(ans,diametre[it]);
     }
   }
-
   lli numOFchild=children.size();
   if(numOFchild==0)
   diametre[n]=0;

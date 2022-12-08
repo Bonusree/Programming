@@ -6,18 +6,14 @@ vector<lli> vc[200000];
 
 void dfs(lli n, lli par)
 {
-  
   for (auto it : vc[n])
   {
     if (it != par)
     {
-     
-      dfs(it, n);
+     dfs(it, n);
      child[n]=1+child[it];
-     
     }
   }
- 
 }
 
 

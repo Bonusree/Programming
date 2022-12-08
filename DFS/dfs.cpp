@@ -6,18 +6,14 @@ vector<lli> vc[200000];
 
 void dfs(lli n, lli par)
 {
-  
   for (auto it : vc[n])
   {
     if (it != par)
     {
-     
-      dfs(it, n);
+     dfs(it, n);
      numberOfChild[n]=max(numberOfChild[n],1+numberOfChild[it]);
-     
     }
   }
- 
 }
 
 
