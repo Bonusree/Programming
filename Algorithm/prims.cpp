@@ -2,40 +2,40 @@
 using namespace std;
 #define lli long long int
 const lli node=10000;
-vector<pair<lli,lli>>hotehobe[node+1];
+vector<pair<lli,lli>>vc[node+1];
 
-void nahoilemair(lli mul,lli ses)
+void prims(lli mul,lli ses)
 {
-    lli dekhbo[ses+1],nibo[ses+1];
+    lli visited[ses+1],cost[ses+1];
     for(lli i=0;i<=ses;i++)
     {
-        dekhbo[i]=0;
-        nibo[i]=INT_MAX;
+        visited[i]=0;
+        cost[i]=INT_MAX;
     }
-    priority_queue<pair<lli,lli>>kahini;
-    kahini.push({0,mul});
+    priority_queue<pair<lli,lli>>q;
+    q.push({0,mul});
     lli khela=0;
-    nibo[mul]=0;
-    vector<lli>ekhnses;
-    while(!kahini.empty())
+    cost[mul]=0;
+    vector<lli>ans;
+    while(!q.empty())
     {
-        lli aso=kahini.top().second;
-        lli boso=(-1)*kahini.top().first;
-        kahini.pop();
-        if(dekhbo[aso]==0)
+        lli u=q.top().second;
+        lli c=(-1)*q.top().first;
+        q.pop();
+        if(visited[u]==0)
         {
-            dekhbo[aso]=1;
-            cout<<aso<<" "<<boso<<endl;
-            ekhnses.push_back(aso);
-            khela+=boso;
-            for(lli ok=0;ok<hotehobe[aso].size();ok++)
+           visited[u]=1;
+           // cout<<aso<<" "<<boso<<endl;
+            ans.push_back(u);
+            khela+=c;
+            for(lli ok=0;ok<vc[u].size();ok++)
             {
-                lli ghumao=hotehobe[aso][ok].first;
+                lli v=vc[u][ok].first;
                
-                    if(hotehobe[aso][ok].second<nibo[ghumao])
+                    if(vc[u][ok].second<cost[v])
                     {
-                        nibo[ghumao]=hotehobe[aso][ok].second;
-                        kahini.push({((-1)*nibo[ghumao]),ghumao});
+                        cost[v]=vc[u][ok].second;
+                        q.push({((-1)*cost[v]),v});
                     }
                 
             }
@@ -43,8 +43,8 @@ void nahoilemair(lli mul,lli ses)
 
     }
     cout<<khela<<endl;
-    for(lli i=0;i<ekhnses.size();i++)
-    cout<<ekhnses[i]<<" ";
+    for(lli i=0;i<ans.size();i++)
+    cout<<ans[i]<<" ";
 }
 int main()
 {
@@ -53,9 +53,9 @@ int main()
     for(i=0;i<n;i++)
     {
       cin>>a>>b>>c;
-      hotehobe[a].push_back({b,c});
-      hotehobe[b].push_back({a,c});  
+     vc[a].push_back({b,c});
+      vc[b].push_back({a,c});  
     }
-    nahoilemair(1,m);
+    prims(1,m);
 
 }
